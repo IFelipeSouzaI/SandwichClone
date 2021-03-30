@@ -6,8 +6,9 @@ public class PieceMovement : MonoBehaviour
 {
     private Vector2 firstTouchPos;
     private Vector2 finalTouchPos;
-
     public int ingredientAmount = 1;
+    
+    public GameObject anotherPiece;
 
     private void OnMouseDown(){
         firstTouchPos = Input.mousePosition;
@@ -16,9 +17,12 @@ public class PieceMovement : MonoBehaviour
     private void OnMouseUp(){
         finalTouchPos = Input.mousePosition;
         Debug.Log("I: " + firstTouchPos + " <-> F: " + finalTouchPos);
-        if(Vector2.Distance(firstTouchPos, finalTouchPos) > 200f){
+        if(Vector2.Distance(firstTouchPos, finalTouchPos) > 125){
             Vector2 dir = GetDir(AngleBetween(firstTouchPos, finalTouchPos));
             transform.position += new Vector3(dir.x, ingredientAmount*0.2f, dir.y);
+            transform.Rotate(new Vector3(dir.y*180, 0, dir.x*180));
+            anotherPiece.GetComponent<PieceMovement>().ingredientAmount += ingredientAmount;
+            transform.parent = anotherPiece.transform;
         }
     }
     

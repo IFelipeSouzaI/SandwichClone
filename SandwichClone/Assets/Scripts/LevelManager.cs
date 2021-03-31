@@ -5,52 +5,71 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour{
 
     private bool canMove = true;
-    public GameObject piecePreFab;
     private int currentLevelIndex = 0;
     public List<Level> levels;
-    public GameObject[,] board = new GameObject[4,4];
-    private int index = 0;
+    
+    private int pieceIndex = 0;
+    public GameObject piecePreFab;
+    public GameObject[,] board;
+    private const int BOARD_HEIGHT = 4;
+    private const int BOARD_WIDTH = 4;
 
     void Start()
     {
+        board = new GameObject[BOARD_HEIGHT,BOARD_WIDTH];
+        FillTheBoard();
         GameEvents.current.hasTouchEnded += HasNeighbor;
+    }
+
+    private void FillTheBoard(){
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].topRow[i]){
-                NewPiece(levels[currentLevelIndex].topRow[i], i+0.5f, 3.5f);
+            if(levels[currentLevelIndex].bottomRow[i]){
+                board[0,i] = NewPiece(levels[currentLevelIndex].bottomRow[i], i+0.5f, 0.5f);
             }
-        }
-        for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].topMiddleRow[i]){
-                NewPiece(levels[currentLevelIndex].topMiddleRow[i], i+0.5f, 2.5f);
-            }
+            pieceIndex += 1;
         }
         for(int i = 0; i < 4; i++){
             if(levels[currentLevelIndex].bottomMiddleRow[i]){
-                NewPiece(levels[currentLevelIndex].bottomMiddleRow[i], i+0.5f, 1.5f);
+                board[1,i] = NewPiece(levels[currentLevelIndex].bottomMiddleRow[i], i+0.5f, 1.5f);
             }
+            pieceIndex += 1;
         }
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].bottomRow[i]){
-                NewPiece(levels[currentLevelIndex].bottomRow[i], i+0.5f, 0.5f);
+            if(levels[currentLevelIndex].topMiddleRow[i]){
+                board[2,i] = NewPiece(levels[currentLevelIndex].topMiddleRow[i], i+0.5f, 2.5f);
             }
+            pieceIndex += 1;
+        }
+        for(int i = 0; i < 4; i++){
+            if(levels[currentLevelIndex].topRow[i]){
+                board[3,i] = NewPiece(levels[currentLevelIndex].topRow[i], i+0.5f, 3.5f);
+            }
+            pieceIndex += 1;
         }
     }
 
-    private void NewPiece(Ingredient ingredient, float x, float z){
-        Vector3 pos = new Vector3(x, 0, z);
+    private GameObject NewPiece(Ingredient ingredient, float x, float z){
+        Vector3 pos = new Vector3(x, 0f, z);
         GameObject obj = (GameObject)Instantiate(piecePreFab, pos, Quaternion.identity);
         obj.transform.parent = transform;
-        obj.GetComponent<PieceMovement>().ingredientID = index;
-        index += 1;
+        obj.GetComponent<PieceManager>().ingredientID = pieceIndex;
         obj.GetComponent<MeshFilter>().mesh = ingredient.mesh;
+        return obj;
     }
 
-    private void HasNeighbor(int id){
+    private void HasNeighbor(int id, Vector2 moveDir){
         if(!canMove){
             return;
         }
-        if(true){
-            GameEvents.current.CombineIngredients(id);
+        int targetRow = (int)id/4 + (int)moveDir.y;
+        int targetColumn = id%4 + (int)moveDir.x;
+        //Debug.Log(targetRow + " -- " + targetColumn);
+        if(targetRow >= BOARD_HEIGHT || targetRow < 0 || targetColumn >= BOARD_WIDTH || targetColumn < 0){
+            return;
+        }
+        if(board[targetRow, targetColumn]){
+            GameEvents.current.CombineIngredients(id, board[targetRow, targetColumn]);
+            board[(int)id/4, id%4] = null;
         }
     }
 }

@@ -11,17 +11,17 @@ public class GameEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action<int> hasTouchEnded;
-    public void TouchEnded(int id){
+    public event Action<int, Vector2> hasTouchEnded;
+    public void TouchEnded(int id, Vector2 moveDir){
         if(hasTouchEnded != null){
-            hasTouchEnded(id);
+            hasTouchEnded(id, moveDir);
         }
     }
 
-    public event Action<int> canCombineIngredients;
-    public void CombineIngredients(int id){
+    public event Action<int, GameObject> canCombineIngredients;
+    public void CombineIngredients(int id, GameObject neighbor){
         if(canCombineIngredients != null){
-            canCombineIngredients(id);
+            canCombineIngredients(id, neighbor);
         }
     }
 }

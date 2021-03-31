@@ -20,9 +20,10 @@ public class PieceManager : MonoBehaviour
     private void Combine(int id, GameObject neighbor){
         if(id == ingredientID){
             Vector2 dir = GetDir(AngleBetween(firstTouchPos, finalTouchPos));
-            transform.position += new Vector3(dir.x, ingredientAmount*PIECE_HEIGHT, dir.y);
-            transform.Rotate(new Vector3(dir.y*180, 0, dir.x*180));
+            int totalIngredientAmount = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount-1);
+            transform.position += new Vector3(dir.x, totalIngredientAmount*PIECE_HEIGHT, dir.y);
             neighbor.GetComponent<PieceManager>().ingredientAmount += ingredientAmount;
+            transform.Rotate(new Vector3(dir.y*180, 0, dir.x*180));
             transform.parent = neighbor.transform;
             GetComponent<Collider>().enabled = false;
         }

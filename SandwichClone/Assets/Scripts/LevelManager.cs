@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour{
         }
         int targetRow = (int)id/4 + (int)moveDir.y;
         int targetColumn = id%4 + (int)moveDir.x;
-        //Debug.Log(targetRow + " -- " + targetColumn);
+        //Debug.Log("TRow: "targetRow + " -- TColumn" + targetColumn);
         if(targetRow >= BOARD_HEIGHT || targetRow < 0 || targetColumn >= BOARD_WIDTH || targetColumn < 0){
             return;
         }

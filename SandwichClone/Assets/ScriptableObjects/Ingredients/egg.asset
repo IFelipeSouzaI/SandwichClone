@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: egg
   m_EditorClassIdentifier: 
-  ingredientName: egg
+  strID: E
   mesh: {fileID: -4591002169977161409, guid: 237b3637fef582141af1bb867cd4b333, type: 3}

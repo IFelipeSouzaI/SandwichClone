@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: tomato
   m_EditorClassIdentifier: 
-  ingredientName: Tomato
+  strID: T
   mesh: {fileID: 5892359386350019813, guid: 9a3befa7349f72546a23713b485d080f, type: 3}

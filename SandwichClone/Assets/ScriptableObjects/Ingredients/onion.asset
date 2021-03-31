@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: onion
   m_EditorClassIdentifier: 
-  ingredientName: Onion
+  strID: O
   mesh: {fileID: 3209097409963520316, guid: c77eac8d54eae40469b6495263e744be, type: 3}

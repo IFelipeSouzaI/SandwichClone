@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: ham
   m_EditorClassIdentifier: 
-  ingredientName: Ham
+  strID: H
   mesh: {fileID: -5899765258942939302, guid: a5ade6f8a1b24fa4aa55db6c7df9c1b2, type: 3}

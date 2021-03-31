@@ -7,8 +7,12 @@ public class PieceManager : MonoBehaviour
     private Vector2 firstTouchPos;
     private Vector2 finalTouchPos;
 
+    private Ingredient ingredient;
+    public string strID = "";
     public int ingredientID  = 0;
     public int ingredientAmount = 1;
+    private int originRow;
+    private int originColumn;
 
     private Vector3 finalPos;
     private Vector3 heightMatch;
@@ -18,7 +22,17 @@ public class PieceManager : MonoBehaviour
     private const float PIECE_HEIGHT = 0.2f;
 
     private void Start(){
-        GameEvents.current.canCombineIngredients += Combine;
+        GameEvents.current.canCombineIngredients += MoveTo;
+    }
+
+    public void SetData(int id, Ingredient scriptableIngredient){
+        ingredient = scriptableIngredient;
+        GetComponent<MeshFilter>().mesh = ingredient.mesh;
+        //GetComponent<MeshRenderer>().material = ingredient.material;
+        strID = ingredient.strID;
+        originRow = (int)id/4;
+        originColumn = id%4;
+        ingredientID = id;
     }
 
     private void Update(){
@@ -34,21 +48,37 @@ public class PieceManager : MonoBehaviour
                 transform.position = finalPos;
                 transform.rotation = Quaternion.Euler(rotateTo);
                 finalPos = Vector3.zero;
+                GameEvents.current.MovementEnded(ingredientAmount, strID);
             }
         }
     }
 
-    private void Combine(int id, GameObject neighbor){
+    private void MoveTo(int id, GameObject neighbor){
         if(id == ingredientID){
             Vector2 dir = GetDir(AngleBetween(firstTouchPos, finalTouchPos));
-            int totalIngredientAmount = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount-1);
-            finalPos = transform.position + new Vector3(dir.x, totalIngredientAmount*PIECE_HEIGHT, dir.y);
+            
+            int yPos = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount-1);
+            finalPos = transform.position + new Vector3(dir.x, yPos*PIECE_HEIGHT, dir.y);
+            
             rotateTo = new Vector3((dir.y*180)*-1, 0, dir.x*180);
             heightMatch = new Vector3(transform.position.x, finalPos.y+1, transform.position.z);
-            neighbor.GetComponent<PieceManager>().ingredientAmount += ingredientAmount;
+            
+            strID = neighbor.GetComponent<PieceManager>().strID + str2rts(strID);
+            neighbor.GetComponent<PieceManager>().strID = strID;
+            ingredientAmount = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount);
+            neighbor.GetComponent<PieceManager>().ingredientAmount = ingredientAmount;
+
             transform.parent = neighbor.transform;
             GetComponent<Collider>().enabled = false;
         }
+    }
+
+    private string str2rts(string str){
+        string rts = "";
+        for(int i = 0; i < ingredientAmount; i++){
+            rts += str[ingredientAmount-1-i];
+        }
+        return rts;
     }
 
     private void OnMouseDown(){
@@ -80,9 +110,3 @@ public class PieceManager : MonoBehaviour
         return new Vector2(0,0);
     }
 }
-
-        /*
-            //Vector2 target = new Vector2(column + dir.x, row + dir.y);
-            //collider.enabled = false;
-            //
-        }*/

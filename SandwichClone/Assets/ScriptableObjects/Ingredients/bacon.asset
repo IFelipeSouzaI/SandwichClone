@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: bacon
   m_EditorClassIdentifier: 
-  ingredientName: Bacon
+  strID: M
   mesh: {fileID: -5473922428828633816, guid: 6fb9d0a78261393469bd67c1316946a9, type: 3}

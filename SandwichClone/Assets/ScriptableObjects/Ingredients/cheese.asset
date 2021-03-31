@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: cheese
   m_EditorClassIdentifier: 
-  ingredientName: Cheese
+  strID: C
   mesh: {fileID: -2719439086681959747, guid: 95296acc482b5df439c627a9bea7355a, type: 3}

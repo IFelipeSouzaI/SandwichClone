@@ -4,6 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ingredient", menuName = "Ingredient")]
 public class Ingredient : ScriptableObject{
-    public string ingredientName;
+    public string strID = "N";
     public Mesh mesh;
+    //public Material material;
 }

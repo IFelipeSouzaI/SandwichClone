@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1f695dc51a6c947a0c2ce13eeace6f, type: 3}
   m_Name: bread
   m_EditorClassIdentifier: 
-  ingredientName: Bread
+  strID: B
   mesh: {fileID: -4548727101508622366, guid: ea7f2a998f4a35d4285a9b8cb0d40f2c, type: 3}

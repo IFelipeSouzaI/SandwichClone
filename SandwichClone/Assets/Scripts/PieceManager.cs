@@ -23,6 +23,7 @@ public class PieceManager : MonoBehaviour
 
     private void Start(){
         GameEvents.current.canCombineIngredients += MoveTo;
+        GameEvents.current.toCleanUp += Disappear;
     }
 
     public void SetData(int id, Ingredient scriptableIngredient){
@@ -56,13 +57,10 @@ public class PieceManager : MonoBehaviour
     private void MoveTo(int id, GameObject neighbor){
         if(id == ingredientID){
             Vector2 dir = GetDir(AngleBetween(firstTouchPos, finalTouchPos));
-            
             int yPos = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount-1);
             finalPos = transform.position + new Vector3(dir.x, yPos*PIECE_HEIGHT, dir.y);
-            
             rotateTo = new Vector3((dir.y*180)*-1, 0, dir.x*180);
             heightMatch = new Vector3(transform.position.x, finalPos.y+1, transform.position.z);
-            
             strID = neighbor.GetComponent<PieceManager>().strID + str2rts(strID);
             neighbor.GetComponent<PieceManager>().strID = strID;
             ingredientAmount = (ingredientAmount + neighbor.GetComponent<PieceManager>().ingredientAmount);
@@ -71,6 +69,11 @@ public class PieceManager : MonoBehaviour
             transform.parent = neighbor.transform;
             GetComponent<Collider>().enabled = false;
         }
+    }
+
+    private void Disappear(){
+        GameEvents.current.canCombineIngredients -= MoveTo;
+        GameEvents.current.toCleanUp -= Disappear;
     }
 
     private string str2rts(string str){

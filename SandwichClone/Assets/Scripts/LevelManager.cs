@@ -6,53 +6,96 @@ public class LevelManager : MonoBehaviour{
 
     private bool canMove = false;
     private int currentLevelIndex = 0;
-    public List<Level> levels;
-    
+    public Level[] genericLevel;
+    public List<Ingredient> ingredients;
+
     private int pieceIndex = 0;
     private int ingredientTotal = 0;
     public GameObject piecePreFab;
     public GameObject[,] board;
+
     private const int BOARD_HEIGHT = 4;
     private const int BOARD_WIDTH = 4;
 
     private void Start()
     {
+        //LevelInfo.levels = genericLevel;
         board = new GameObject[BOARD_HEIGHT, BOARD_WIDTH];
-        FillTheBoard();
+        if(LevelInfo.levelID != -1){
+            currentLevelIndex = LevelInfo.levelID;
+            FillTheBoard();
+        }else{
+            FillTheBoardRandomly();
+        }
         GameEvents.current.hasTouchEnded += HasNeighbor;
         GameEvents.current.hasMovementEnded += CheckAfterMove;
+        GameEvents.current.genNewLevel += LoadNewLevel;
+    }
+
+    private void FillTheBoardRandomly(){
+
     }
 
     private void FillTheBoard(){
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].bottomRow[i]){
-                board[0,i] = NewPiece(levels[currentLevelIndex].bottomRow[i], i+0.5f, 0.5f);
+            if(LevelInfo.levels[currentLevelIndex].bottomRow[i]){
+                board[0,i] = NewPiece(LevelInfo.levels[currentLevelIndex].bottomRow[i], i+0.5f, 0.5f);
                 ingredientTotal += 1;
             }
             pieceIndex += 1;
         }
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].bottomMiddleRow[i]){
-                board[1,i] = NewPiece(levels[currentLevelIndex].bottomMiddleRow[i], i+0.5f, 1.5f);
+            if(LevelInfo.levels[currentLevelIndex].bottomMiddleRow[i]){
+                board[1,i] = NewPiece(LevelInfo.levels[currentLevelIndex].bottomMiddleRow[i], i+0.5f, 1.5f);
                 ingredientTotal += 1;
             }
             pieceIndex += 1;
         }
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].topMiddleRow[i]){
-                board[2,i] = NewPiece(levels[currentLevelIndex].topMiddleRow[i], i+0.5f, 2.5f);
+            if(LevelInfo.levels[currentLevelIndex].topMiddleRow[i]){
+                board[2,i] = NewPiece(LevelInfo.levels[currentLevelIndex].topMiddleRow[i], i+0.5f, 2.5f);
                 ingredientTotal += 1;
             }
             pieceIndex += 1;
         }
         for(int i = 0; i < 4; i++){
-            if(levels[currentLevelIndex].topRow[i]){
-                board[3,i] = NewPiece(levels[currentLevelIndex].topRow[i], i+0.5f, 3.5f);
+            if(LevelInfo.levels[currentLevelIndex].topRow[i]){
+                board[3,i] = NewPiece(LevelInfo.levels[currentLevelIndex].topRow[i], i+0.5f, 3.5f);
                 ingredientTotal += 1;
             }
             pieceIndex += 1;
         }
         canMove = true;
+    }
+
+    private void LoadNewLevel(int levelComplete){
+        BoardClear();
+        if(LevelInfo.levelID == -1){
+            FillTheBoardRandomly();
+            return;
+        }
+        if(levelComplete == 1){
+            currentLevelIndex += 1;
+            if(currentLevelIndex >= LevelInfo.levels.Length){
+                currentLevelIndex = 0;
+            }
+        }
+        canMove = true;
+        pieceIndex = 0;
+        ingredientTotal = 0;
+        FillTheBoard();
+    }
+
+    private void BoardClear(){
+        GameEvents.current.CleanUp();
+        for(int i = 0; i < BOARD_HEIGHT; i++){
+            for(int j = 0; j < BOARD_WIDTH; j++){
+                if(board[i,j]){
+                    Destroy(board[i,j]);
+                }
+                board[i,j] = null;
+            }
+        }
     }
 
     private GameObject NewPiece(Ingredient scriptableIngredient, float x, float z){
@@ -83,13 +126,12 @@ public class LevelManager : MonoBehaviour{
     public void CheckAfterMove(int ingredientAmount, string strID){
         Debug.Log(strID);
         if(ingredientAmount == ingredientTotal){
-            Debug.Log("GameFinished");
+            Debug.Log("Size Match");
             if(strID[0] == 'B' && strID[0] == strID[ingredientTotal-1]){
-                Debug.Log("WINNER");
-                GameEvents.current.GameFinished("Winner");
+                Debug.Log("WIN");
+                GameEvents.current.LevelFinished("Winner");
             }else{
-                Debug.Log("LOSER");
-                GameEvents.current.GameFinished("Loser");
+                GameEvents.current.LevelFinished("Loser");
             }
             return;
         }

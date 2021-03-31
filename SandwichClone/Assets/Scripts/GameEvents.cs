@@ -32,13 +32,25 @@ public class GameEvents : MonoBehaviour
         }
     }
 
-    public event Action<string> hasGameFinished;
-    public void GameFinished(string result){
-        if(hasGameFinished != null){
-            hasGameFinished(result);
+    public event Action<string> hasLevelFinished;
+    public void LevelFinished(string result){
+        if(hasLevelFinished != null){
+            hasLevelFinished(result);
         }
     }
 
-    
+    public event Action toCleanUp;
+    public void CleanUp(){
+        if(toCleanUp != null){
+            toCleanUp();
+        }
+    }
+
+    public event Action<int> genNewLevel;
+    public void NewLevel(int levelComplete){
+        if(genNewLevel != null){
+            genNewLevel(levelComplete);
+        }
+    }
 
 }

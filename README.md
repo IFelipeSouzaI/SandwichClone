@@ -40,7 +40,7 @@ The logic used has two primordial elements: Pieces and Board Matrix
 - If a piece was found in the target position, so the movement is possible;
 - When a pice move to another, both pices has their ingredientAmount summed and the piece what is moving add their inverted ingredientID to the piece below;
 
-**The ingredientID is inverted to simulate the rotation, example: (Bread, Tomato, Onion) BTO is fliped to B:**
+**The ingredientID is inverted to simulate the rotation, example: (Bread, Tomato, Onion) a BTO piece is moved on top of a B piece:**
 
 **B will receive BTO inverted, so the final result is: B + OTB (Onion, Tomato, Bread) all the ingredients fliped;**
 

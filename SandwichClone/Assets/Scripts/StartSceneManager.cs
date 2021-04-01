@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour
@@ -26,10 +25,10 @@ public class StartSceneManager : MonoBehaviour
         if(!canTouch){
             return;
         }
-        if(Convert.ToInt32(inputText.text) >= allLevels.Length){
+        if(int.Parse(inputText.text) >= allLevels.Length || int.Parse(inputText.text) < 0){
             errorLabel.text = "Error, level was not found \n" + "Nº Levels: " + allLevels.Length + " -> " + 0 + " | " + (allLevels.Length-1);
         }else{
-            LevelInfo.levelID = Convert.ToInt32(inputText.text);
+            LevelInfo.levelID = int.Parse(inputText.text);
             anim.Play("out");
             canTouch = false;
         }

@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour{
 
     private bool canMove = false;
     private int currentLevelIndex = 0;
-    public Level[] genericLevel;
+    public Level[] testLevels;
     public List<Ingredient> ingredients;
 
     private int pieceIndex = 0;
@@ -17,12 +17,13 @@ public class LevelManager : MonoBehaviour{
     private const int BOARD_HEIGHT = 4;
     private const int BOARD_WIDTH = 4;
 
-    private void Start()
-    {
-        //LevelInfo.levels = genericLevel;
+    private void Start(){
         board = new GameObject[BOARD_HEIGHT, BOARD_WIDTH];
-        if(LevelInfo.levelID != -1){
+        if(LevelInfo.levelID >= 0){
             currentLevelIndex = LevelInfo.levelID;
+            FillTheBoard();
+        }else if(LevelInfo.levelID == -2){
+            LevelInfo.levels = testLevels;
             FillTheBoard();
         }else{
             FillTheBoardRandomly();

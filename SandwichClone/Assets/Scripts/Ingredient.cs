@@ -6,5 +6,5 @@ using UnityEngine;
 public class Ingredient : ScriptableObject{
     public string strID = "N";
     public Mesh mesh;
-    //public Material material;
+    //public Material material; // -> all the materials are the same, so, this was removed
 }

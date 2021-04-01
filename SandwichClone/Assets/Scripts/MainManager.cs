@@ -11,23 +11,33 @@ public class MainManager : MonoBehaviour
         GameEvents.current.hasLevelFinished += LevelFinished;
     }
 
-    public void StartScene(){
+    public void StartScenePressed(){ // Canvas Button
         anim.Play("out");
     }
 
-    public void ResetLevel(){
+    public void ChangeScene(){ // Called at the end of the animation out
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+    }
+
+    public void RestartLevelPressed(){ // Canvas Button
         anim.Play("levelFail", 0, 0.0f);
     }
 
-    public void ChangeScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
-    }
-    
-    public void NewLevel(int levelComplete){
-        GameEvents.current.NewLevel(levelComplete);
+    public void NewLevelPressed(){ // Canvas Button
+        LevelInfo.levelID = -1;
+        anim.Play("levelComplete", 0, 0.0f);
     }
 
-    public void LevelFinished(string result){
+    // Animation "levelFail" is used to restart a level -> (Rong ingredients combination - Button "restart" pressed) 
+    public void RestartLevel(){ // Called in animation "levelFail"
+        GameEvents.current.LevelReset(false);
+    }
+
+    public void NewLevel(){ // Called in animation "levelComplete"
+        GameEvents.current.LevelReset(true);
+    }
+
+    public void LevelFinished(string result){ // Event listener "hasLevelFinished"
         if(result == "Winner"){
             anim.Play("levelComplete", 0, 0.0f);
         }else{

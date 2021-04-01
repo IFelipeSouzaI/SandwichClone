@@ -11,7 +11,7 @@ public class StartSceneManager : MonoBehaviour
     public Level[] allLevels;
     public Text errorLabel;
     public Text levelsLabel;
-    public bool canTouch = true;
+    private bool canTouch = true;
 
     private void Awake(){
         LevelInfo.levels = allLevels;
@@ -21,7 +21,7 @@ public class StartSceneManager : MonoBehaviour
         levelsLabel.text = "Nº Levels: " + allLevels.Length + " -> " + 0 + " | " + (allLevels.Length-1);
     }
 
-    public void LoadLevel(){
+    public void LoadLevelPressed(){ // Button
         if(!canTouch){
             return;
         }
@@ -34,13 +34,13 @@ public class StartSceneManager : MonoBehaviour
         }
     }
 
-    public void RandomLevel(){
-        /*if(!canTouch){
+    public void RandomLevelPressed(){ // Button
+        if(!canTouch){
             return;
         }
         LevelInfo.levelID = -1;
         anim.Play("out");
-        canTouch = false;*/
+        canTouch = false;
     }
 
     public void MainScene(){

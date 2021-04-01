@@ -13,8 +13,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -64,30 +66,34 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11250}
+      Script: {instanceID: 11252}
     - Class: 114
-      Script: {instanceID: 11448}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11552}
+      Script: {instanceID: 11450}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11554}
     - Class: 114
-      Script: {instanceID: 11968}
+      Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 12066}
+      Script: {instanceID: 11970}
     - Class: 114
-      Script: {instanceID: 12226}
+      Script: {instanceID: 12068}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12814}
+      Script: {instanceID: 12706}
     - Class: 114
-      Script: {instanceID: 12924}
+      Script: {instanceID: 12816}
     - Class: 114
-      Script: {instanceID: 13060}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13100}
+      Script: {instanceID: 13062}
+    - Class: 114
+      Script: {instanceID: 13102}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -129,27 +135,27 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11250}
+      Script: {instanceID: 11252}
     - Class: 114
-      Script: {instanceID: 11408}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11448}
+      Script: {instanceID: 11450}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 12066}
+      Script: {instanceID: 12068}
     - Class: 114
-      Script: {instanceID: 12166}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12226}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12414}
+      Script: {instanceID: 12416}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 12706}
     - Class: 114
-      Script: {instanceID: 12814}
+      Script: {instanceID: 12816}
     - Class: 114
-      Script: {instanceID: 13060}
+      Script: {instanceID: 13062}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -403,7 +409,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 7f696c5b4913e19ea8f825ae86d5c658
+      Hash: 7b4cc20b52dc5257aee6d24404041900
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StartSceneManager
@@ -523,7 +529,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 12d8d2024fd9eef34dbf856cde24ba81
+      Hash: d07d505a398d284cc8466cd346df671d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PieceManager
@@ -613,7 +619,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 49d099c7e0426348108d345b5e6db119
+      Hash: 3231139bb1cad38c0d78b7126b108b54
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelManager

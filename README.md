@@ -34,17 +34,17 @@ B = bread, O = onion, T = Tomato, S = salad
  0  1  2  3
 ```
 - Every piece has a (str) ingredientID -> Used to indentify what type of ingredient it is;
-- Every piece has a (int) ingredientAmount -> Keep how many pieces are attached;
+- Every piece has a (int) ingredientAmount -> Keeps how many pieces are attached;
 
 # Piece Movement Implementation
-- First, a unit vector is created based in the angle between the first and last touch position (This vector contains the direction what the piece should move);
-- This vector + piece position give the target position in the board;
+- First, a unit vector is created based in the angle between the first and last touch position (This vector contains the direction that piece should move);
+- This vector + piece position gives the target position in the board;
 - If a piece was found in the target position, so the movement is possible;
-- When a pice move to another, both pices has their ingredientAmount summed and the piece what is moving add their inverted ingredientID to the piece below;
+- When a piece moves to another, both pieces have their ingredientAmount added and the piece what is moving add their inverted ingredientID to the piece below;
 
-**The ingredientID is inverted to simulate the rotation, example: (Bread, Tomato, Onion) a BTO piece is moved on top of a B piece:**
+**The (str) ingredientID is inverted to simulate the rotation, example: (Bread, Tomato, Onion) a BTO piece is moved on top of a B piece:**
 
-**B will receive BTO inverted, so the final result is: B + OTB (Onion, Tomato, Bread) all the ingredients fliped;**
+**B will receive BTO inverted, so the final result is: B + OTB (Onion, Tomato, Bread) all the ingredients are fliped;**
 
 - When a movement is finished, a verification is called to see if all the ingredients are attached and to see if has a bread in top and bottom;
 

@@ -16,7 +16,9 @@ B = bread, O = onion, T = Tomato, S = salad
 - bottomMiddleRow;
 - bottomRow;
 
-The logic used has two primordial elements: Pieces and Board Matrix
+
+**The logic used has two primordial elements: Pieces and Board Matrix**
+
 
 # Board Implementation
 - A matrix of GameObjects 4x4 to keep all the pieces reference

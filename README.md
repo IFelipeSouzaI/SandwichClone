@@ -24,7 +24,7 @@ B = bread, O = onion, T = Tomato, S = salad
 - A matrix of GameObjects 4x4 to keep all the pieces reference
 
 # Piece Implementation
-- Every piece has an (int) pieceID -> This is used to identify what piece need to move and the position in the board matrix (row = (int)ID/4, column = ID%4);
+- Every piece has an (int) pieceID -> This is used to identify what piece need to be moved and their position in the board matrix (row = (int)ID/4, column = ID%4);
 
 **ID Distribution (4x4 board):**
 ```

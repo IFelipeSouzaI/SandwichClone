@@ -10,7 +10,7 @@ B = bread, O = onion, T = Tomato, S = salad
 - material: keep the ingredient material (its not being used since all the ingredient uses the same material)
 
 # Scriptable Object (Level)
-- Used to create a level, store the Ingredient what every row should have;
+- Used to create a level, stores the Ingredient(Scriptable Object) that every row should have;
 - topRow;
 - topMiddleRow;
 - bottomMiddleRow;

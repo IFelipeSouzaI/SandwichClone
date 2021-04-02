@@ -6,8 +6,8 @@ Linkedin Ability Showcase - Sandwich Clone
 ```
 B = bread, O = onion, T = Tomato, S = salad
 ```
-- mesh: keep the ingredient mesh
-- material: keep the ingredient material (its not being used since all the ingredient uses the same material)
+- mesh: keeps the ingredient mesh
+- material: keeps the ingredient material (its not being used since all the ingredient uses the same material)
 
 # Scriptable Object (Level)
 - Used to create a level, stores the Ingredient(Scriptable Object) that every row should have;
